@@ -1,6 +1,5 @@
 from flask import Flask, render_template, redirect, request, make_response, session, abort, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from flask_ngrok import run_with_ngrok
 from data import db_session, old_news_api
 from data.users import User
 from data.news import News
@@ -9,7 +8,6 @@ from forms.news import NewsForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-run_with_ngrok(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
