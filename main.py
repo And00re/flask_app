@@ -5,6 +5,8 @@ from data.users import User
 from data.news import News
 from forms.user import RegisterForm, LoginForm
 from forms.news import NewsForm
+import os
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -164,4 +166,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
