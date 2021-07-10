@@ -1,9 +1,8 @@
 import flask
 from flask import jsonify, request, Flask
 from flask_restful import reqparse, abort, Api, Resource
-from . import db_session
+from . import db_session, news_resources
 from .news import News
-import news_resources
 
 
 app = Flask(__name__)
