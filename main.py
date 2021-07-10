@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, make_response, session, abort, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from data import db_session, news_api
+from flask_restful import Api
+from data import db_session, news_api, news_resources
 from data.users import User
 from data.news import News
 from forms.user import RegisterForm, LoginForm
@@ -9,6 +10,7 @@ import os
 
 
 app = Flask(__name__)
+api = Api(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
@@ -157,6 +159,11 @@ def news_delete(id):
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+api.add_resource(news_resources.NewsListResource, '/api/v2/news')
+
+api.add_resource(news_resources.NewsResource, '/api/v2/news/<int:news_id>')
 
 
 def main():

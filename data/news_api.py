@@ -1,13 +1,10 @@
 import flask
 from flask import jsonify, request, Flask
-from flask_restful import reqparse, abort, Api, Resource
-from . import db_session, news_resources
+from . import db_session
 from .news import News
 
 
 app = Flask(__name__)
-api = Api(app)
-
 
 blueprint = flask.Blueprint(
     'news_api',
@@ -72,7 +69,3 @@ def delete_news(news_id):
     db_sess.commit()
     return jsonify({'success': 'OK'})
 
-
-api.add_resource(news_resources.NewsListResource, '/api/v2/news')
-
-api.add_resource(news_resources.NewsResource, '/api/v2/news/<int:news_id>')
