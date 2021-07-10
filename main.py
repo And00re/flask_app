@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, make_response, session, abort, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from data import db_session, old_news_api
+from data import db_session, news_api
 from data.users import User
 from data.news import News
 from forms.user import RegisterForm, LoginForm
@@ -161,7 +161,7 @@ def not_found(error):
 
 def main():
     db_session.global_init("db/blogs.db")
-    app.register_blueprint(old_news_api.blueprint)
+    app.register_blueprint(news_api.blueprint)
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
 
